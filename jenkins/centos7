@@ -1,0 +1,18 @@
+#!/bin/bash
+yum -y update
+//INSTALL JAVA8
+yum install java-1.8.0-openjdk-devel
+
+//INSTALL JENKINS
+curl --silent --location http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo | sudo tee /etc/yum.repos.d/jenkins.repo
+sudo rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
+sudo yum install jenkins
+sudo systemctl start jenkins
+systemctl status jenkins
+systemctl enable jenkins
+
+//ENABLING PORT 8080 
+yum -y install firewalld
+systemctl start firewalld
+sudo firewall-cmd --permanent --zone=public --add-port=8080/tcp
+sudo firewall-cmd --reload
