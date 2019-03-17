@@ -1,0 +1,22 @@
+sudo apt update
+sudo apt install openjdk-8-jdk
+
+//Import the GPG keys of the Jenkins repository
+wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
+
+//add the Jenkins repository to the system
+sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+
+//Install JENKINS
+sudo apt update
+sudo apt install jenkins
+
+//automatically start after the installation process is complete
+systemctl status jenkins
+
+//firewall protection:open port 8080 
+sudo ufw allow 8080
+sudo ufw status
+
+//VIEW JENKINS PASSWD
+cat /var/lib/jenkins/secrets/initialAdminPassword
